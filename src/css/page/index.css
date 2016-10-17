@@ -1,0 +1,17 @@
+html,body{
+	font-family: "微软雅黑";
+}
+body{background-image: url(../../img/4.jpg)}
+.pageContent{
+	width: 100%;
+}
+
+/**content*/
+.pictureShowWrapper{
+	width: 1000px;
+	margin: 0 auto;
+}
+.pictureShowWrapper .pictureShow{
+	margin: 60px auto 0;
+}
+dl{color:red}

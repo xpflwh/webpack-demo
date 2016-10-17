@@ -1,0 +1,80 @@
+plugin:
+	1、webpack-md5-hash:  生成文件内容hash
+		
+		url:		https://www.npmjs.com/package/webpack-md5-hash
+		install:	npm install webpack-md5-hash --save-dev
+		methods:	
+					var WebpackMd5Hash = require('webpack-md5-hash');
+			 
+					module.exports = {
+					    // ... 
+					    output: {
+					        //... 
+					        chunkFilename: "[chunkhash].[id].chunk.js"
+					    },
+					    plugins: [
+					        new WebpackMd5Hash()
+					    ]
+					};
+		problem:	output.filename 中[name].[chunkhash] 中的chunkhash 																		并不只是内容变得时候才更新，默认的跟机器名，时间戳都有关系，如果要只是生成文件内容的md5，可以使用[webpack-md5-hash] 					，也就是在plugins 里面添加 new WebpackMd5Hash()
+	2、UglifyJsPlugin:  压缩
+			
+			new webpack.optimize.UglifyJsPlugin({
+		        compress: {
+		            warnings: false
+		        },
+		        sourceMap: true,//这里的soucemap 不能少，可以在线上生成soucemap文件，便于调试
+		        mangle: true
+		    })
+
+	3、webpack.ProvidePlugin 加载依赖 公共库
+
+		plugins: [
+		   new webpack.ProvidePlugin({
+		       'Moment': 'moment',
+		       "$": "jquery",
+		       "jQuery": "jquery",
+		       "window.jQuery": "jquery",
+		       "React": "react"
+		   })
+		]
+
+	4、webpack.DefinePlugin：开发环境与发布环境配置    采用魔力变量(magic globals)来处理。
+
+		var webpack = require('webpack');
+ 
+		var definePlugin = new webpack.DefinePlugin({
+		    __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'false')),
+		    __PRERELEASE__: JSON.stringify(JSON.parse(process.env.BUILD_PRERELEASE || 'true'))
+		});
+		 
+		...
+		 
+		plugins: [
+		    definePlugin
+		]
+
+	5、html-webpack-plugin : 动态 html 模版
+
+		URL：https://www.npmjs.com/package/html-webpack-plugin
+		install：$ npm install html-webpack-plugin --save-dev
+		problem: 
+				这个插件用来简化创建服务于 webpack bundle 的 HTML 文件，尤其是对于在文件名中包含了 hash 值，而这个值在每次编译的时候都发生变化的情况。你既可以让这个插件来帮助你自动生成 HTML 文件，也可以使用 lodash 模板加载生成的 bundles，或者自己加载这些 bundles。
+
+		Configuration
+ 				可以进行一系列的配置，支持如下的配置信息
+
+			title: 		用来生成页面的 title 元素
+			filename: 	输出的 HTML 文件名，默认是 index.html, 也可以直接配置带有子目录。
+			template: 	模板文件路径，支持加载器，比如 html!./index.html
+			inject: 	true | 'head' | 'body' | false  ,注入所有的资源到特定的 template 或者 templateContent 中，如果设置为 true 或者 body，所有的 javascript 资源将被放置到 body 元素的底部，'head' 将放置到 head 元素中。
+			favicon: 	添加特定的 favicon 路径到输出的 HTML 文件中。
+			minify: 	{} | false , 传递 html-minifier 选项给 minify 输出
+			hash: 		true | false, 如果为 true, 将添加一个唯一的 webpack 编译 hash 到所有包含的脚本和 CSS 文件，对于解除 cache 很有用。
+			cache: 		true | false，如果为 true, 这是默认值，仅仅在文件修改之后才会发布文件。
+			showErrors: true | false, 如果为 true, 这是默认值，错误信息会写入到 HTML 页面中
+			chunks: 	允许只添加某些块 (比如，仅仅 unit test 块)
+			chunksSortMode: 允许控制块在添加到页面之前的排序方式，支持的值：'none' | 'default' | {function}-default:'auto'
+			excludeChunks: 允许跳过某些块，(比如，跳过单元测试的块) 
+
+	6、clean-webpack-plugin : build 之前 清空 dist 目录

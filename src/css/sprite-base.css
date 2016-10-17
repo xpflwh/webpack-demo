@@ -1,0 +1,48 @@
+.icon-weixin {
+  display: inline-block;
+  background-position: 0px 0px;
+  width: 40px;
+  height: 40px;
+  background-image: url('../img/sprite-base.png');
+}
+
+.icon-i8 {
+  display: inline-block;
+  background-position: 0px -40px;
+  width: 48px;
+  height: 44px;
+  background-image: url('../img/sprite-base.png');
+}
+
+.icon-yeoman {
+  display: inline-block;
+  background-position: 0px -84px;
+  width: 103px;
+  height: 89px;
+  background-image: url('../img/sprite-base.png');
+}
+
+.icon-redux-logo {
+  display: inline-block;
+  background-position: 0px -173px;
+  width: 444px;
+  height: 120px;
+  background-image: url('../img/sprite-base.png');
+}
+
+.icon-react-router-logo {
+  display: inline-block;
+  background-position: 0px -293px;
+  width: 698px;
+  height: 312px;
+  background-image: url('../img/sprite-base.png');
+}
+
+.icon-wxcode {
+  display: inline-block;
+  background-position: 0px -605px;
+  width: 430px;
+  height: 430px;
+  background-image: url('../img/sprite-base.png');
+}
+
