@@ -70,7 +70,7 @@ module.exports = function(options) {
     var cssLoader;
     var sassLoader;
     plugins.push(
-        new CleanWebpackPlugin(['dist', 'build'], {
+        new CleanWebpackPlugin(['dist', 'build','src/img/sprite-base.png','src/css/sprite-base.css'], {
             root: path.resolve(__dirname), // An absolute path for the root. 
             verbose: true, // Write logs to console.
             dry: false, // Use boolean "true" to test/emulate delete. (will not remove files). (Default: "false", remove files) 
